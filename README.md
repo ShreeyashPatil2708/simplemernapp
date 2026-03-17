@@ -8,6 +8,7 @@ A simple insurance website built with Node.js and Express.
 - Calculates and displays an estimated premium
 - Lists submitted quote requests
 - No authentication
+- Quote requests are stored in memory (reset when the server restarts)
 
 ## Run locally
 1. Install dependencies:

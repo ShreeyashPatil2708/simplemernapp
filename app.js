@@ -4,6 +4,8 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 const quoteRequests = [];
+const AGE_THRESHOLD = 30;
+const AGE_SURCHARGE_PER_YEAR_OVER_THRESHOLD = 0.8;
 
 app.use(express.urlencoded({ extended: false }));
 app.use('/public', express.static('public'));
@@ -91,7 +93,7 @@ app.post('/quote', (req, res) => {
   };
 
   const basePrice = basePriceByPlan[plan] || 30;
-  const ageAdjustment = Math.max(0, numericAge - 30) * 0.8;
+  const ageAdjustment = Math.max(0, numericAge - AGE_THRESHOLD) * AGE_SURCHARGE_PER_YEAR_OVER_THRESHOLD;
   const estimatedPremium = (basePrice + ageAdjustment).toFixed(2);
 
   quoteRequests.push({
